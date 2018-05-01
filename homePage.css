@@ -1,0 +1,19 @@
+/* Global Variables */
+:root {
+    --placeholder: 5;
+
+}
+
+html {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+body {
+    display: flex;
+}
+
+main {
+    display: flex;
+}
