@@ -2,6 +2,7 @@
     --arrow-size: 6px;
     --border: 1px solid gray;
     --content-text: 1.5em;
+    --padding: 5px;
     --rounding: 10px;
     --spacing: 15px;
     --question-size: 75%;
@@ -17,11 +18,19 @@
     margin: var(--spacing);
 }
 
+#answers {
+
+}
+
 .answer-button {
     color: var(--color-button);
     display: inline-block;
     font-weight: bold;
     margin-right: 5px;
+}
+
+.answer-button:hover {
+    cursor: pointer;
 }
 
 .answer-buttons {
@@ -45,6 +54,7 @@
 
 .answer-user {
     display: inline-block;
+    margin-left: 3px;
 }
 
 .answer-vote {
@@ -100,6 +110,7 @@ h1.heading {
     color: var(--color-light);
     display: inline-block;
     font-size: 1em;
+    padding: var(--padding) 0 var(--padding) 0;
     width: 25%;
 }
 
@@ -145,7 +156,7 @@ h1.heading {
     cursor: pointer;
 }
 
-.question {
+#question {
     padding: 0px 0px var(--spacing) 0px;
 }
 
@@ -219,6 +230,7 @@ h1.heading {
 #search {
     border-radius: var(--rounding);
     font-size: 1em;
+    padding: var(--padding) 0 var(--padding) 0;
     width: 60%;
 }
 
