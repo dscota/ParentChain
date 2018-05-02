@@ -100,6 +100,14 @@ h1.heading {
     margin-bottom: 0px;
 }
 
+h1.new-form-grouping {
+    text-align: center;
+}
+
+h3.new-post-header {
+    margin-top: 0px;
+}
+
 #new {
     margin-top: var(--spacing);
 }
@@ -114,7 +122,42 @@ h1.heading {
     width: 25%;
 }
 
-.page_center {
+.new-post-header {
+    width: 20%;
+}
+
+.new-post-input {
+    border-radius: var(--rounding);
+    resize: none;
+    width: 100%;
+}
+
+input.new-post-input {
+    height: 3ex;
+}
+
+textarea.new-post-input {
+    height: 20ex;
+}
+
+#new-post-submit {
+    background-color: var(--color-main);
+    border-radius: calc(var(--spacing)/2);
+    color: var(--color-light);
+    display: inline-block;
+    font-size: 1em;
+    padding: var(--padding);
+}
+
+#new-post-form {
+    padding: 0 0 var(--spacing) 0;
+}
+
+.new-form-grouping {
+    padding: 0 var(--spacing) var(--spacing) var(--spacing);
+}
+
+#page_center {
     display: inline-block;
     vertical-align: text-top;
     width: var(--question-size);

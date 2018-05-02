@@ -5,7 +5,22 @@ function kanyeTest() {
     updateQuestion(post);
 }
 
+function newPostForm() {
+    var results = document.getElementById("results-content");
+
+    console.log(document.getElementById("results-content"));
+    for (var i = 0; i < results.children.length; i++) {
+        results.children[i].classList.remove("current");
+    }
+
+    document.getElementById("new-post-form").hidden = false;
+    document.getElementById("question").hidden = true;
+    document.getElementById("answers").hidden = true;
+}
+
 function change(id) {
+    document.getElementById("new-post-form").hidden = true;
+
     var results = document.getElementById("results-content");
 
     for (var i = 0; i < results.children.length; i++) {

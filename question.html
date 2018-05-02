@@ -15,7 +15,7 @@
 <body>
     <div class="side_bar grouping">
         <div id="new">
-            <button id="new-post"><span><i class="far fa-file"></i></span> New Post</button>
+            <button id="new-post" onclick="newPostForm()"><span><i class="far fa-file"></i></span> New Post</button>
             <span>or</span>
             <input type="text" placeholder="Search..." id="search">
         </div>
@@ -24,7 +24,7 @@
                 <h1 class="heading">Results</h1>
             </div>
             <div id="results-content">
-                <div class="result current" id="r0" onclick="change(0)">
+                <div class="result" id="r0" onclick="change(0)">
                     <h3 class="result-header">How to raise sea people?</h3>
                     <div class="result-content">Look at me, livin' free. Free and clean amongst the Sea People. We look for pirates and search for gold.
                         Life is an adventure with the Sea People. They don't ever complain, they don't call me fat. They don't make me do homework or nothin' like that.
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="page_center">
+    <div id="page_center" hidden>
         <div class="grouping" id="question" hidden>
             <h1 id="question-header">
             </h1>
@@ -69,6 +69,26 @@
                 <input type="submit" id="post-submit">
             </form>
         </div>
+
+
+        <form class="grouping" id="new-post-form">
+            <h1 class="new-form-grouping">Create a New Post</h1>
+            <div class="new-form-grouping">
+                <h3 class="new-post-header">Title:</h3>
+                <input type="text" class="new-post-input" id="new-title" placeholder="Title..." required>
+            </div>
+            <div class="new-form-grouping">
+                <h3 class="new-post-header">Description:</h3>
+                <textarea class="new-post-input" id="new-content" placeholder="Description..." required></textarea>
+            </div>
+            <div class="new-form-grouping">
+                <h3 class="new-post-header">Tags:</h3>
+                <input type="text" class="new-post-input" placeholder="Tags..." id="new-tags" required>
+            </div>
+            <div class="new-form-grouping">
+                <button id="new-post-submit">Submit</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>
