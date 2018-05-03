@@ -50,7 +50,7 @@ function getAnswers() {
             1: {
                 "user": "Kenny",
                 "rating": 0,
-                "content": "*muffled yelling*",
+                "conten t": "*muffled yelling*",
                 "id": 1
             }
         }

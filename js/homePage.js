@@ -31,14 +31,19 @@ Util.events(document, {
 
     // Click events arrive here
     "click": function (evt) {
-        // codee
+        // code
+
 
     },
 
     //Input events arrive here
     "input": function(evt) {
-        //code
+
     }
 
-})
+});
+
+function searchClick() {
+    window.location.href ="./question.html"
+}
 
