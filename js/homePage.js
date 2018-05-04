@@ -47,3 +47,13 @@ function searchClick() {
     window.location.href ="./question.html"
 }
 
+function profileClick() {
+    //Take me to the profile
+    //Maybe use an event listener to help parse profiles
+}
+
+function postClick() {
+    //Takes you to a particular post
+    //Might need an event listener to figure out which post to go to...
+}
+
