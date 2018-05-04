@@ -107,6 +107,7 @@ function updateRating(id, increase) {
         up.classList.remove("active");
         down.classList.remove("active");
     }
+    return document.getElementById("aa-"+id).innerText;
 }
 
 function updateQuestion(post) {
@@ -169,6 +170,12 @@ function createReply(id, parent, data) {
 }
 
 function addAnswer() {
+    var answersList = document.getElementById("answers-list");
+    if (!(currentPost in answers)) {
+        while (answersList.lastChild) {
+            answersList.removeChild((answersList.lastChild));
+        }
+    }
     if (Util.one("#post-textbox").value.length > 0) {    
         var newAnswer = createReplyData(Util.one("#post-textbox").value);
         clearAnswer();
@@ -179,7 +186,7 @@ function addAnswer() {
         }
 
         var answer = createAnswer(newAnswer);
-        document.getElementById("answers-list").appendChild(createAnswer(newAnswer));
+        answersList.appendChild(createAnswer(newAnswer));
     }
 }
 
@@ -189,8 +196,23 @@ function createAnswer(data) {
     var answer = Util.create("div", {"class": "answer", "id": "a-"+id});
     var rating = Util.create("div", {"class": "answer-vote"});
     var amount = Util.create("div", {"class": "answer-vote-amount", "id": "aa-"+id});
-    var arrowUp = Util.create("div", {"class": "arrow arrow-up", "id": "au-"+id, "onclick": "updateRating("+id+", 1)"});
-    var arrowDown = Util.create("div", {"class": "arrow arrow-down", "id": "ad-"+id, "onclick": "updateRating("+id+", -1)"});
+    var arrowUp = Util.create("div", {"class": "arrow arrow-up", "id": "au-"+id});
+    var arrowDown = Util.create("div", {"class": "arrow arrow-down", "id": "ad-"+id});
+
+    arrowUp.addEventListener("click", function() {
+        data["rating"] = updateRating(id, 1);
+    });
+    arrowDown.addEventListener("click", function() {
+        data["rating"] = updateRating(id, -1);
+    });
+
+    if (id in liked) {
+        if (liked[id] > 0) {
+            arrowUp.classList.add("active");
+        } else {
+            arrowDown.classList.add("active");
+        }
+    }
     amount.innerText = data["rating"];
 
     rating.appendChild(arrowUp);
@@ -202,7 +224,7 @@ function createAnswer(data) {
     var answerRight = Util.create("div", {"class": "answer-right"});
     var answerHeader = Util.create("div", {"class": "answer-header"});
 
-    var answerProfile = Util.create("div", {"class": "profile button", "id": "ap-"+id});
+    var answerProfile = Util.create("a", {"class": "profile button", "id": "ap-"+id, "href":"dogtor.html"});
     var answerProfileIcon = Util.create("i", {"class": "fas fa-user-circle"});
     var answerProfileName = Util.create("div", {"class": "answer-user profile-name", "id": "an-"+id});
     answerProfileName.innerText = data["user"];
@@ -213,10 +235,10 @@ function createAnswer(data) {
 
     var answerButtons = Util.create("div", {"class": "answer-buttons"});
 
-    var saveButton = Util.create("a", {"class": "answer-button", "id": "as-"+id});
+    var saveButton = Util.create("a", {"class": "answer-button", "id": "as-"+id, "title":"Bookmark"});
     saveButton.appendChild(Util.create("i", {"class": "far fa-bookmark"}));
 
-    var replyButton = Util.create("a", {"class": "answer-button", "id": "ar-"+id});
+    var replyButton = Util.create("a", {"class": "answer-button", "id": "ar-"+id, "title": "Reply"});
     replyButton.appendChild(Util.create("i", {"class": "fas fa-reply"}));
 
     console.log("adding "+id)
@@ -228,7 +250,8 @@ function createAnswer(data) {
         replying = id;
     })
 
-    var blockButton = Util.create("a", {"class": "answer-button", "id": "ab-"+id});
+    var blockButton = Util.create("a", 
+    {"class": "answer-button", "id": "ab-"+id, "title": "Report"});
     blockButton.appendChild(Util.create("i", {"class": "far fa-times-circle"}));
 
     answerButtons.appendChild(saveButton);

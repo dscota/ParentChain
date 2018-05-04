@@ -2,7 +2,7 @@
     --arrow-size: 6px;
     --border: 1px solid gray;
     --content-text: 1.5em;
-    --result-size: 60px;
+    --result-size: 10ex;
     --max-results: 10;
     --padding: 5px;
     --rounding: 10px;
@@ -116,7 +116,6 @@ body {
 #container {
     text-align: center;
     padding: 0 10% 0 10%;
-    /*width: 80%;*/
 }
 
 .grouping {
@@ -128,7 +127,7 @@ body {
 }
 
 h1.heading {
-    margin-bottom: 0px;
+    margin: 0px;
 }
 
 h1.comment {
@@ -143,18 +142,28 @@ h3.new-post-header {
     margin-top: 0px;
 }
 
+h1.home {
+    color: var(--color-light);
+    font-size: 3em;
+    margin: var(--spacing);
+}
+
 #new {
-    margin-top: var(--spacing);
+    margin: var(--spacing) calc(var(--spacing)/2) calc(var(--spacing)/2) calc(var(--spacing)/2);
 }
 
 button {
     background-color: var(--color-main);
     border-radius: calc(var(--spacing)/2);
-    color: var(--color-light);
+    color: var(--color-dark);
     display: inline-block;
     font-size: 1em;
     padding: var(--padding) 0 var(--padding) 0;
     width: 25%;
+}
+
+#new-post {
+    margin-right: var(--spacing);
 }
 
 #new-post:hover {
@@ -184,7 +193,7 @@ textarea.new-post-input {
 #new-post-submit {
     background-color: var(--color-main);
     border-radius: calc(var(--spacing)/2);
-    color: var(--color-light);
+    color: var(--color-dark);
     display: inline-block;
     font-size: 1em;
     padding: var(--padding);
@@ -208,7 +217,7 @@ textarea.new-post-input {
     /*background-color: var(--accent-dark);*/
     border-bottom-right-radius: var(--rounding);
     border-bottom-left-radius: var(--rounding);
-    padding: var(--spacing);
+    padding: 0 var(--spacing) var(--spacing) var(--spacing);
 }
 
 .post-button {
@@ -222,6 +231,7 @@ textarea.new-post-input {
 textarea {
     border-radius: var(--rounding);
     height: 10ex;
+    padding: 0.3em;
     resize: none;
     width: 100%;
 }
@@ -237,7 +247,7 @@ textarea {
     background-color: var(--color-main);
     border-top-right-radius: var(--rounding);
     border-bottom-left-radius: var(--rounding);
-    color: var(--color-light);
+    color: var(--color-dark);
     display: inline-block;
     font-weight: bold;
     padding: calc(var(--spacing)/2);
@@ -276,22 +286,22 @@ textarea {
     background-color: var(--color-light);
     color: var(--color-dark);
     cursor: pointer;
-    padding-left: var(--spacing);
-    height: var(--result-size);
+    padding: calc(var(--spacing)/3) var(--spacing);
+    max-height: var(--result-size);
 }
 
 .result:hover{
-    background-color: var(--color-main);
+    background-color: var(--color-dark);
     color: var(--color-light);
 }
 
 .result.current {
-    background-color: var(--accent-dark);
-    color: var(--color-light);
+    background-color: var(--color-main);
+    color: var(--color-dark);
 }
 
 .result-content {
-    height: 4ex;
+    max-height: 5ex;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -308,12 +318,15 @@ textarea {
 
 #results-content {
     background-color: var(--color-light);
+    border: 0.2em var(--accent-light) solid;
     max-height: calc(var(--result-size) * var(--max-results));
     overflow-y: var(--scroll);
 }
 
 #results-header {
     background-color: var(--color-dark);
+    border: 0.2em var(--accent-light) solid;
+    border-bottom: none;
     border-top-left-radius: var(--rounding);
     border-top-right-radius: var(--rounding);
     color: var(--color-light);

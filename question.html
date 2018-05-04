@@ -14,9 +14,12 @@
 </head>
 <body >
     <div id="container">
+        <a href="index.html">
+            <h1 class="home">ParentChain</h1>
+        </a>
         <div class="side_bar grouping">
             <div id="new">
-                <button class="button" id="new-post"><span><i class="far fa-file"></i></span> Post</button>
+                <button class="button" id="new-post" onclick="window.location.replace('newPost.html')"><span><i class="far fa-file"></i></span> Post</button>
                 <input type="text" placeholder="Search..." id="search">
             </div>
             <div id="results">
@@ -37,12 +40,12 @@
                 </div>
                 <div id="question-submit">
                     Submitted by
-                    <div class="profile button">
+                    <a class="profile button" href="dogtor.html">
                         <i class="fas fa-user-circle">
                             <div class="profile-name" id="question-user">
                             </div>
                         </i>
-                    </div>
+                    </a>
                 </div>
             </div>
 
