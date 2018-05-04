@@ -1,0 +1,9 @@
+.follow {
+  color: white;
+  background-color: var(--color-dark);
+  margin-left: 490px;
+}
+
+.new-form-grouping {
+  padding-bottom: 0px;
+}
