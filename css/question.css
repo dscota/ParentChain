@@ -2,10 +2,14 @@
     --arrow-size: 6px;
     --border: 1px solid gray;
     --content-text: 1.5em;
+    --result-size: 60px;
+    --max-results: 10;
     --padding: 5px;
     --rounding: 10px;
     --spacing: 15px;
+    --scroll: scroll;
     --question-size: 75%;
+    --writing: none;
     --color-button: #5cd7e5;
     --color-main: #5BE0E7;
     --color-light: #F3F3F0;
@@ -19,7 +23,7 @@
 }
 
 #answers {
-
+    padding-top: var(--spacing);
 }
 
 .answer-button {
@@ -30,7 +34,9 @@
 }
 
 .answer-button:hover {
+    color: var(--color-dark);
     cursor: pointer;
+    transform: scale(1.3, 1.3);
 }
 
 .answer-buttons {
@@ -76,6 +82,16 @@
     padding: 7px;
 }
 
+.arrow:hover {
+    border: solid var(--color-dark);
+    border-width: 0 var(--arrow-size) var(--arrow-size) 0;
+}
+
+.arrow.active {
+    border: solid var(--color-dark);
+    border-width: 0 var(--arrow-size) var(--arrow-size) 0;
+}
+
 .arrow-down {
     transform: rotate(45deg);
 }
@@ -89,15 +105,26 @@ body {
     color: var(--color-dark);
 }
 
+#container {
+    text-align: center;
+    padding: 0 10% 0 10%;
+    /*width: 80%;*/
+}
+
 .grouping {
     background-color: var(--color-light);
     border: var(--border);
     border-radius: var(--rounding);
     margin-bottom: 10px;
+    text-align: left;
 }
 
 h1.heading {
     margin-bottom: 0px;
+}
+
+h1.comment {
+    padding-left: var(--spacing);
 }
 
 h1.new-form-grouping {
@@ -112,7 +139,7 @@ h3.new-post-header {
     margin-top: var(--spacing);
 }
 
-#new-post {
+button {
     background-color: var(--color-main);
     border-radius: calc(var(--spacing)/2);
     color: var(--color-light);
@@ -120,6 +147,12 @@ h3.new-post-header {
     font-size: 1em;
     padding: var(--padding) 0 var(--padding) 0;
     width: 25%;
+}
+
+#new-post:hover {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    cursor: pointer;
 }
 
 .new-post-header {
@@ -170,8 +203,8 @@ textarea.new-post-input {
     padding: var(--spacing);
 }
 
-#post-submit {
-    display: none;
+.post-button {
+    display: var(--writing);
 }
 
 #post-textbox {
@@ -195,9 +228,10 @@ textarea.new-post-input {
     padding: calc(var(--spacing)/2);
 }
 
-.profile:hover {
-    cursor: pointer;
+.profile-name:hover {
+    text-decoration: underline;
 }
+
 
 #question {
     padding: 0px 0px var(--spacing) 0px;
@@ -229,6 +263,7 @@ textarea.new-post-input {
     color: var(--color-dark);
     cursor: pointer;
     padding-left: var(--spacing);
+    height: var(--result-size);
 }
 
 .result:hover{
@@ -258,8 +293,9 @@ textarea.new-post-input {
 }
 
 #results-content {
-    background-color: var(--color-dark);
-    overflow-y: scroll;
+    background-color: var(--color-light);
+    max-height: calc(var(--result-size) * var(--max-results));
+    overflow-y: var(--scroll);
 }
 
 #results-header {
@@ -297,7 +333,7 @@ textarea.new-post-input {
     padding: 6px;
 }
 
-.tag:hover {
+.button:hover {
     background-color: var(--color-dark);
     color: var(--color-light);
     cursor: pointer;

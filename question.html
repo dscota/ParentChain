@@ -12,83 +12,52 @@
     <script src="js/question.js"></script>
     <title>ParentChain</title>
 </head>
-<body>
-    <div class="side_bar grouping">
-        <div id="new">
-            <button id="new-post" onclick="newPostForm()"><span><i class="far fa-file"></i></span> New Post</button>
-            <span>or</span>
-            <input type="text" placeholder="Search..." id="search">
-        </div>
-        <div id="results">
-            <div id="results-header">
-                <h1 class="heading">Results</h1>
+<body >
+    <div id="container">
+        <div class="side_bar grouping">
+            <div id="new">
+                <button class="button" id="new-post"><span><i class="far fa-file"></i></span> Post</button>
+                <input type="text" placeholder="Search..." id="search">
             </div>
-            <div id="results-content">
-                <div class="result" id="r0" onclick="change(0)">
-                    <h3 class="result-header">How to raise sea people?</h3>
-                    <div class="result-content">Look at me, livin' free. Free and clean amongst the Sea People. We look for pirates and search for gold.
-                        Life is an adventure with the Sea People. They don't ever complain, they don't call me fat. They don't make me do homework or nothin' like that.
-                        This is the way life was meant to be. Laughin' and singing, Sea people and me. Sea people and me, you guys.
+            <div id="results">
+                <div id="results-header">
+                    <h1 class="heading">Results</h1>
+                </div>
+                <div id="results-content">
+                </div>
+            </div>
+        </div>
+        <div id="page_center">
+            <div class="grouping" id="question" hidden>
+                <h1 id="question-header">
+                </h1>
+                <div id="question-content">
+                </div>
+                <div id="tags">
+                </div>
+                <div id="question-submit">
+                    Submitted by
+                    <div class="profile button">
+                        <i class="fas fa-user-circle">
+                            <div class="profile-name" id="question-user">
+                            </div>
+                        </i>
                     </div>
                 </div>
-                <div class="result" id="r1" onclick="change(1)">
-                    <h3 class="result-header">Who killed Kanye West?</h3>
-                    <div class="result-content">Look at me, livin' free. Free and clean amongst the Sea People. We look for pirates and search for gold.
-                        Life is an adventure with the Sea People. They don't ever complain, they don't call me fat. They don't make me do homework or nothin' like that.
-                        This is the way life was meant to be. Laughin' and singing, Sea people and me. Sea people and me, you guys.
-                    </div>
+            </div>
+
+            <div class="grouping" id="answers" hidden>
+                <div id="answers-list">
+                    <h1>No comments</h1>
+                </div>
+                <div id="post">
+                    <h3 id="post-title">Write your own answer</h3>
+                    <textarea id="post-textbox"></textarea>
+                    <button class="button post-button" id="post-submit">Post</button>
+                    <button class="button post-button" id="post-cancel">Cancel</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="page_center" hidden>
-        <div class="grouping" id="question" hidden>
-            <h1 id="question-header">
-            </h1>
-            <div id="question-content">
-            </div>
-            <div id="tags">
-            </div>
-            <div id="question-submit">
-                Submitted by
-                <div class="profile">
-                    <i class="fas fa-user-circle">
-                        <div id="question-user">
-                        </div>
-                    </i>
-                </div>
-            </div>
-        </div>
-
-        <div class="grouping" id="answers" hidden>
-            <div id="answers-list">
-            </div>
-            <form id="post">
-                <h3 id="post-title">Write your own answer</h3>
-                <textarea id="post-textbox"></textarea>
-                <input type="submit" id="post-submit">
-            </form>
-        </div>
-
-
-        <form class="grouping" id="new-post-form">
-            <h1 class="new-form-grouping">Create a New Post</h1>
-            <div class="new-form-grouping">
-                <h3 class="new-post-header">Title:</h3>
-                <input type="text" class="new-post-input" id="new-title" placeholder="Title..." required>
-            </div>
-            <div class="new-form-grouping">
-                <h3 class="new-post-header">Description:</h3>
-                <textarea class="new-post-input" id="new-content" placeholder="Description..." required></textarea>
-            </div>
-            <div class="new-form-grouping">
-                <h3 class="new-post-header">Tags:</h3>
-                <input type="text" class="new-post-input" placeholder="Tags..." id="new-tags" required>
-            </div>
-            <div class="new-form-grouping">
-                <button id="new-post-submit">Submit</button>
-            </div>
-        </form>
     </div>
 </body>
 </html>

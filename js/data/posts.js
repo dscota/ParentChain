@@ -38,6 +38,10 @@ function getPosts() {
     }
 }
 
+function getSearchResults() {
+    return [0, 1]
+}
+
 function getAnswers() {
     return {
         0 : {
@@ -50,7 +54,7 @@ function getAnswers() {
             1: {
                 "user": "Kenny",
                 "rating": 0,
-                "conten t": "*muffled yelling*",
+                "content": "*muffled yelling*",
                 "id": 1
             }
         }
