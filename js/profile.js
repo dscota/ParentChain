@@ -4,13 +4,15 @@ var isFollowing = false;
 
 function follow_click(){
   if (isFollowing) {
-    followers[profile] -= 1;
     isFollowing = false;
+    document.getElementById("follow_button").innerText = "Follow";
+    document.getElementById("follow_button").className = "follow";
     //change follow button
   }
   else {
-    followers[profile] += 1;
     isFollowing = true;
+    document.getElementById("follow_button").innerText = "Following";
+    document.getElementById("follow_button").className = "following";
     //change follow button
   }
 }

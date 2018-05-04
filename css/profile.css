@@ -2,10 +2,19 @@
   color: white;
   background-color: var(--color-dark);
   margin-left: 380px;
+  font-weight: bold;
 }
 
 .follow:hover {
   background-color: green;
+}
+
+.following {
+  color: lightgreen;
+  background-color: white;
+  border-color: lightgreen;
+  margin-left: 380px;
+  font-weight: bold;
 }
 
 .new-form-grouping {
@@ -42,4 +51,10 @@
   font-size: 20px;
   font-weight: bold;
   color: white;
+}
+
+.bio {
+  padding-top: 30px;
+  font-size: 25px;
+  font-weight: bold;
 }
