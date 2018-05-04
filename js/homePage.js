@@ -7,7 +7,7 @@
 //constants
 
 
-// Holds DOM elements that don’t change, to avoid repeatedly querying the DOM
+// Holds DOM elements that don’t loadPost, to avoid repeatedly querying the DOM
 var dom = {};
 
 
@@ -31,14 +31,19 @@ Util.events(document, {
 
     // Click events arrive here
     "click": function (evt) {
-        // codee
+        // code
+
 
     },
 
     //Input events arrive here
     "input": function(evt) {
-        //code
+
     }
 
-})
+});
+
+function searchClick() {
+    window.location.href ="./question.html"
+}
 

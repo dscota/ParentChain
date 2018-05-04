@@ -1,6 +1,13 @@
 /* Global Variables */
 :root {
     --placeholder: 5;
+    --rounding: 5px;
+    --search-width: 30%;
+    --arrow-dimensions: 150px;
+    --color-main: #5BE0E7;
+    --color-dark: #2D4491/*#2E517E #2554CA*/;
+    --color-light: #6b89ba;
+
 
 }
 
@@ -12,8 +19,87 @@ html {
 
 body {
     display: flex;
+    flex-direction: column;
+    align-items:center;
+    min-width: 100%;
+
 }
 
 main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 5;
+    min-width: 100%;
+    justify-content: flex-start;
+    padding-top: 50px;
+}
+
+header {
+    display:flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.feed {
+    display: flex;
+    flex: 1;
+}
+
+#searchBar{
+    display: flex;
+    flex: 1;
+    border-radius: inherit;
+    margin-right: 1px;
+    font-size: 15pt;
+}
+
+#searchButton {
+    border-radius: inherit;
+    margin-left: 1px;
+}
+
+#search {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: var(--search-width);
+    border-radius: var(--rounding);
+
+}
+
+#greeting {
+    display: flex;
+    justify-content: left;
+    min-width: var(--search-width);
+    font-size: 18pt;
+    font-weight: bold;
+}
+#arrow{
+    display: flex;
+    max-width: var(--arrow-dimensions);
+    max-height: var(--arrow-dimensions);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#newQuestion {
+    display: flex;
+    color: var(--color-light);
+}
+
+#newQuestion:hover {
+    color: var(--color-dark);
+}
+
+
+#title1 {
+    font-size: 48pt;
+    color: var(--color-dark);
+    font-weight: bold;
+}
+#title2 {
+    font-size: 13pt;
+    color: var(--color-light);
 }

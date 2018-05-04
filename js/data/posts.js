@@ -38,6 +38,10 @@ function getPosts() {
     }
 }
 
+function getSearchResults() {
+    return [0, 1]
+}
+
 function getAnswers() {
     return {
         0 : {

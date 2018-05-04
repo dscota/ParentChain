@@ -1,8 +1,33 @@
 var posts = getPosts();
+var answers = getAnswers();
+var liked = {};
 
-function kanyeTest() {
-    var post = posts[1];
-    updateQuestion(post);
+
+function onLoad() {
+    var searchResults = getSearchResults();
+
+    var results = document.getElementById("results-content");
+
+    for (var i = 0; i < searchResults.length; i++) {
+        console.log(i);
+        var id = searchResults[i];
+
+        var result = Util.create("div", {"class": "result", "id":"r"+id, "onclick":"loadPost("+id+")"});
+
+        var header = Util.create("h3", {"class": "result-header"});
+        header.innerText = posts[id]["title"];
+
+        var content = Util.create("div", {"class": "result-content"});
+        content.innerText = posts[id]["content"];
+
+        result.appendChild(header);
+        result.appendChild(content);
+
+        console.log(result);
+        results.appendChild(result);
+    }
+
+    loadPost(searchResults[0]);
 }
 
 function newPostForm() {
@@ -13,14 +38,12 @@ function newPostForm() {
         results.children[i].classList.remove("current");
     }
 
-    document.getElementById("new-post-form").hidden = false;
     document.getElementById("question").hidden = true;
     document.getElementById("answers").hidden = true;
 }
 
-function change(id) {
-    document.getElementById("new-post-form").hidden = true;
-
+function loadPost(id) {
+    document.body.style.setProperty("--writing", "none");
     var results = document.getElementById("results-content");
 
     for (var i = 0; i < results.children.length; i++) {
@@ -38,15 +61,48 @@ function change(id) {
     while (answersList.lastChild) {
         answersList.removeChild((answersList.lastChild));
     }
-    if (id in getAnswers()) {
-        updateAnswer(getAnswers()[id]);
+    if (id in answers) {
+        updateAnswer(answers[id]);
     } else {
+        var answersList = document.getElementById("answers-list");
+        var header = Util.create("h1",{"class":"heading comment"});
+        header.innerText = "No comments";
+        answersList.appendChild(header);
+    }
+}
+
+function switchArrow(id, increase) {
+    var up = document.getElementById("au-"+id);
+    var down = document.getElementById("ad-"+id);
+    if (increase > 0) {
+        up.classList.add("active");
+        down.classList.remove("active");
+    } else {
+        down.classList.add("active");
+        up.classList.remove("active");
     }
 }
 
 function updateRating(id, increase) {
     var val = parseInt(document.getElementById("aa-"+id).innerText);
-    document.getElementById("aa-"+id).innerText = val + increase;
+
+    if (id in liked && !(liked[id] === increase)) {
+        document.getElementById("aa-"+id).innerText = val + increase * 2;
+        liked[id] = increase;
+        switchArrow(id, increase);
+    } else if (!(id in liked)) {
+        document.getElementById("aa-"+id).innerText = val + increase;
+        liked[id] = increase;
+        switchArrow(id, increase);
+    } else {
+        document.getElementById("aa-"+id).innerText = val - increase;
+        delete liked[id];
+
+        var up = document.getElementById("au-"+id);
+        var down = document.getElementById("ad-"+id)
+        up.classList.remove("active");
+        down.classList.remove("active");
+    }
 }
 
 function updateQuestion(post) {
@@ -63,13 +119,13 @@ function updateQuestion(post) {
     }
 
     for (var i = 0; i < post["tags"].length; i++) {
-        var newTag = Util.create("div", {"class": "tag"});
+        var newTag = Util.create("div", {"class": "tag button"});
         // newTag.classList.add("tag");
         newTag.innerText = post["tags"][i];
         tags.appendChild(newTag);
     }
 
-    user.innerText = post["user"]
+    user.innerText = post["user"];
 }
 
 function updateAnswer(answers) {
@@ -94,9 +150,9 @@ function updateAnswer(answers) {
         var answerRight = Util.create("div", {"class": "answer-right"});
         var answerHeader = Util.create("div", {"class": "answer-header"});
 
-        var answerProfile = Util.create("div", {"class": "profile", "id": "ap-"+id});
+        var answerProfile = Util.create("div", {"class": "profile button", "id": "ap-"+id});
         var answerProfileIcon = Util.create("i", {"class": "fas fa-user-circle"});
-        var answerProfileName = Util.create("div", {"class": "answer-user ", "id": "an-"+id});
+        var answerProfileName = Util.create("div", {"class": "answer-user profile-name", "id": "an-"+id});
         answerProfileName.innerText = answers[i]["user"];
 
         answerProfileIcon.appendChild(answerProfileName);
@@ -130,3 +186,41 @@ function updateAnswer(answers) {
         answersList.appendChild(answer);
     }
 }
+
+function recordingAnswer() {
+    document.body.style.setProperty("--writing", "inline-block");
+}
+
+// Attaching events on document because then we can do it without waiting for
+// the DOM to be ready (i.e. before DOMContentLoaded fires)
+Util.events(document, {
+    // Final initalization entry point: the Javascript code inside this block
+    // runs at the end of start-up when the DOM is ready
+    "DOMContentLoaded": function() {
+        var searchResults = getSearchResults();
+
+        var results = document.getElementById("results-content");
+
+        for (var i = 0; i < searchResults.length; i++) {
+            console.log(i);
+            var id = searchResults[i];
+
+            var result = Util.create("div", {"class": "result", "id":"r"+id, "onclick":"loadPost("+id+")"});
+
+            var header = Util.create("h3", {"class": "result-header"});
+            header.innerText = posts[id]["title"];
+
+            var content = Util.create("div", {"class": "result-content"});
+            content.innerText = posts[id]["content"];
+
+            result.appendChild(header);
+            result.appendChild(content);
+
+            console.log(result);
+            results.appendChild(result);
+        }
+        loadPost(searchResults[0]);
+
+        Util.one("#post-textbox").addEventListener("click", recordingAnswer)
+    }
+});
