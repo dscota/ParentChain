@@ -53,6 +53,14 @@
     margin-left: var(--spacing);
 }
 
+.answer-replies {
+    padding: var(--spacing) var(--spacing) 0 var(--spacing);
+}
+
+.answer-reply-input {
+    padding: var(--spacing);
+}
+
 .answer-right {
     display: inline-block;
     vertical-align: middle;
@@ -207,11 +215,18 @@ textarea.new-post-input {
     display: var(--writing);
 }
 
-#post-textbox {
+.post-button.reply-button {
+    display: inline-block;
+}
+
+textarea {
     border-radius: var(--rounding);
     height: 10ex;
     resize: none;
     width: 100%;
+}
+
+#post-textbox {
 }
 
 #post-title {
@@ -231,7 +246,6 @@ textarea.new-post-input {
 .profile-name:hover {
     text-decoration: underline;
 }
-
 
 #question {
     padding: 0px 0px var(--spacing) 0px;

@@ -44,19 +44,27 @@ function getSearchResults() {
 
 function getAnswers() {
     return {
-        0 : {
-            0: {
+        0 :[
+            {
                 "user": "KyleB",
                 "rating": 12,
                 "content": "You suck Cartmen!",
-                "id": 0
+                "id": 2
             },
-            1: {
+            {
                 "user": "Kenny",
                 "rating": 0,
                 "content": "*muffled yelling*",
-                "id": 1
+                "id": 1,
+                "replies": [
+                    {
+                        "user": "KyleB",
+                        "rating": 1,
+                        "content": "Kenny what did you say!",
+                        "id": 3
+                    },
+                ]
             }
-        }
+        ]
     }
 }
