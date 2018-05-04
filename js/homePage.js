@@ -25,7 +25,19 @@ Util.events(document, {
 
         // Add events
         //Util.one("#buttonIDhere").addEventListener("click", { /* Your code here */ }); // example
-
+        var searchBar = Util.one("#searchBar");
+        Util.one("#searchButton").addEventListener("click", function() {
+            searchClick(searchBar);
+        });
+        searchBar.addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                searchClick(searchBar);
+            }
+        });
+        Util.one("#newQuestion").addEventListener("click", function() {
+            window.location.replace('newPost.html')
+        });
     },
 
 
@@ -43,7 +55,12 @@ Util.events(document, {
 
 });
 
-function searchClick() {
+function searchClick(searchBar) {
+    // if search field is empty, do nothing
+    if(searchBar.value == "") {
+        return;
+    }
+    sessionStorage.setItem('query', searchBar.value);
     window.location.href ="./question.html"
 }
 
@@ -56,4 +73,3 @@ function postClick() {
     //Takes you to a particular post
     //Might need an event listener to figure out which post to go to...
 }
-
