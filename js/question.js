@@ -6,7 +6,7 @@ var replying;
 var nextComment = 4; //TODO delete
 
 function onLoad() {
-    var searchResults = getSearchResults();
+    var searchResults = getSearchResults(sessionStorage.getItem("clicked"));
 
     var results = document.getElementById("results-content");
 
@@ -155,7 +155,7 @@ function createReplyData(content) {
 }
 
 function createReply(id, parent, data) {
-    if (Util.one(id).value.length > 0) {    
+    if (Util.one(id).value.length > 0) {
         var newAnswer = createReplyData(Util.one(id).value);
         clearAnswer();
         if ("replies" in data) {
@@ -176,7 +176,7 @@ function addAnswer() {
             answersList.removeChild((answersList.lastChild));
         }
     }
-    if (Util.one("#post-textbox").value.length > 0) {    
+    if (Util.one("#post-textbox").value.length > 0) {
         var newAnswer = createReplyData(Util.one("#post-textbox").value);
         clearAnswer();
         if (currentPost in answers) {
@@ -250,7 +250,7 @@ function createAnswer(data) {
         replying = id;
     })
 
-    var blockButton = Util.create("a", 
+    var blockButton = Util.create("a",
     {"class": "answer-button", "id": "ab-"+id, "title": "Report"});
     blockButton.appendChild(Util.create("i", {"class": "far fa-times-circle"}));
 
@@ -317,7 +317,7 @@ Util.events(document, {
     // Final initalization entry point: the Javascript code inside this block
     // runs at the end of start-up when the DOM is ready
     "DOMContentLoaded": function() {
-        var searchResults = getSearchResults();
+        var searchResults = getSearchResults(sessionStorage.getItem("clicked"));
 
         var results = document.getElementById("results-content");
 
@@ -325,28 +325,43 @@ Util.events(document, {
             document.body.style.setProperty("--scroll", "none");
         }
 
-        for (var i = 0; i < searchResults.length; i++) {
-            console.log(i);
-            var id = searchResults[i];
-
-            var result = Util.create("div", {"class": "result", "id":"r"+id, "onclick":"loadPost("+id+")"});
-
-            var header = Util.create("h3", {"class": "result-header"});
-            header.innerText = posts[id]["title"];
-
-            var content = Util.create("div", {"class": "result-content"});
-            content.innerText = posts[id]["content"].replace(/\r?\n/, "");
-
-            result.appendChild(header);
-            result.appendChild(content);
-
-            results.appendChild(result);
+        var postButton = Util.one("#post-me");
+        if(postButton != null) {
+            postButton.addEventListener("click", function() {
+                sessionStorage.setItem("clicked", true);
+                window.location.replace('question.html')
+            });
         }
-        loadPost(searchResults[0]);
+        if (postButton == null) {
+            for (var i = 0; i < searchResults.length; i++) {
+                console.log(i);
+                var id = searchResults[i];
 
-        Util.one("#post-textbox").addEventListener("click", recordingAnswer);
+                var result = Util.create("div", {"class": "result", "id":"r"+id, "onclick":"loadPost("+id+")"});
 
-        Util.one("#post-submit").addEventListener("click", addAnswer);
-        Util.one("#post-cancel").addEventListener("click", clearAnswer);
+                var header = Util.create("h3", {"class": "result-header"});
+                header.innerText = posts[id]["title"];
+
+                var content = Util.create("div", {"class": "result-content"});
+                content.innerText = posts[id]["content"].replace(/\r?\n/, "");
+
+                result.appendChild(header);
+                result.appendChild(content);
+
+                results.appendChild(result);
+            }
+            loadPost(searchResults[0]);
+
+            Util.one("#post-textbox").addEventListener("click", recordingAnswer);
+
+            Util.one("#post-submit").addEventListener("click", addAnswer);
+            Util.one("#post-cancel").addEventListener("click", clearAnswer);
+            Util.one("#new-post").addEventListener("click", function() {
+                window.location.replace('newPost.html')
+            });
+            Util.one("#search").value = sessionStorage.getItem('query') == null ? "" : sessionStorage.getItem('query');
+        }
+
+
     }
 });

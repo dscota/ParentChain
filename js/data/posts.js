@@ -34,12 +34,21 @@ function getPosts() {
             "(Now I'm where i belong girl) makin' love to other gay fish",
             "tags": ["sea", "fish", "gay"],
             "user": "FishStix"
+        },
+        2: {
+            "title": "How to raise child?",
+            "content": "How does one raise a child????? HALP!!",
+            "tags": ["seapeople", "child", "human"],
+            "user": "Joanna"
         }
     }
 }
 
-function getSearchResults() {
-    return [0, 1]
+function getSearchResults(clicked) {
+    if (clicked == null) {
+        return [0, 1]
+    }
+    return [0, 1, 2]
 }
 
 function getAnswers() {

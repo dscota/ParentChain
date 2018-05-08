@@ -95,6 +95,7 @@ header {
 
 #newQuestion:hover {
     color: var(--color-dark);
+    cursor: pointer;
 }
 
 
@@ -177,4 +178,3 @@ header {
     font-size: 20pt;
     margin-left: 5pt;
 }
-
