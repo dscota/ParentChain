@@ -432,6 +432,12 @@ textarea {
     transform: scale(1.5, 1.5);
 }
 
+.feed:hover{
+    color: white;
+    background-color: var(--color-dark);
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1500px) {
     #new-post {
         margin-right: calc(var(--spacing)/4);

@@ -16,3 +16,17 @@ function follow_click(){
     //change follow button
   }
 }
+
+
+Util.events(document, {
+    // Final initalization entry point: the Javascript code inside this block
+    // runs at the end of start-up when the DOM is ready
+    "DOMContentLoaded": function () {
+        var feeds = Util.all(".feed").forEach((feedBox) => {
+            feedBox.addEventListener("click", function() {
+                window.location.href ="./question.html";
+            });
+        });
+    },
+
+});
