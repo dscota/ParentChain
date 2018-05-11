@@ -31,6 +31,8 @@ function onLoad() {
 
     currentPost = searchResults[0];
     loadPost(searchResults[0]);
+
+
 }
 
 function newPostForm() {
@@ -190,6 +192,10 @@ function addAnswer() {
     }
 }
 
+function blockComment(buttonId) {
+    Util.one("#a-"+buttonId).classList.add("toggle");
+}
+
 function createAnswer(data) {
     var id = data["id"];
 
@@ -224,7 +230,7 @@ function createAnswer(data) {
     var answerRight = Util.create("div", {"class": "answer-right"});
     var answerHeader = Util.create("div", {"class": "answer-header"});
 
-    var answerProfile = Util.create("a", {"class": "profile button", "id": "ap-"+id, "href":"dogtor.html"});
+    var answerProfile = Util.create("a", {"class": "profile", "id": "ap-"+id, "href":"dogtor.html"});
     var answerProfileIcon = Util.create("i", {"class": "fas fa-user-circle"});
     var answerProfileName = Util.create("div", {"class": "answer-user profile-name", "id": "an-"+id});
     answerProfileName.innerText = data["user"];
@@ -235,8 +241,20 @@ function createAnswer(data) {
 
     var answerButtons = Util.create("div", {"class": "answer-buttons"});
 
-    var saveButton = Util.create("a", {"class": "answer-button", "id": "as-"+id, "title":"Bookmark"});
-    saveButton.appendChild(Util.create("i", {"class": "far fa-bookmark"}));
+    var saveButton = Util.create("a", {"class": "answer-button bookmark", "id": "as-"+id, "title":"Bookmark"});
+    var saveIcon = Util.create("i", {"class": "far fa-bookmark"});
+    saveButton.addEventListener("click", function () {
+        if (saveButton.classList.contains("toggle")) {
+            saveButton.classList.remove("toggle");
+            saveIcon.classList.remove("fas");
+            saveIcon.classList.add("far");
+        } else {
+            saveButton.classList.add("toggle");
+            saveIcon.classList.remove("far");
+            saveIcon.classList.add("fas");
+        }
+    })
+    saveButton.appendChild(saveIcon);
 
     var replyButton = Util.create("a", {"class": "answer-button", "id": "ar-"+id, "title": "Reply"});
     replyButton.appendChild(Util.create("i", {"class": "fas fa-reply"}));
@@ -258,7 +276,29 @@ function createAnswer(data) {
     answerButtons.appendChild(replyButton);
     answerButtons.appendChild(blockButton);
 
+
     answerHeader.appendChild(answerButtons);
+
+    var confirm = Util.create("div", {"id": "c-"+id, "class": "block-confirm"});
+    var yes = Util.create("button", {"type": "button", "class": "block"});
+    yes.innerText = "yes";
+    yes.addEventListener("click", function () {
+        blockComment(id);
+    });
+    var no = Util.create("button", {"type": "button", "class": "block"});
+    no.innerText = "no";
+    no.addEventListener("click", function () {
+        confirm.classList.remove("toggle")
+    })
+    confirm.innerText = "Report and block this comment?";
+    confirm.appendChild(yes);
+    confirm.appendChild(no);
+    answerHeader.appendChild(confirm);
+    blockButton.addEventListener("click", function () {
+        confirm.classList.add("toggle");
+    });
+
+
     answerRight.appendChild(answerHeader);
 
     var answerContent = Util.create("div", {"class": "answer-content"});
@@ -311,6 +351,17 @@ function addReplyBox(id, answer, data) {
     answer.appendChild(container);
 }
 
+function toggleResults() {
+    var list = Util.one("#results-content");
+    if (list.classList.contains("toggle")) {
+        list.classList.remove("toggle");
+        Util.one("#results-header").classList.remove("toggle");
+    } else {
+        list.classList.add("toggle");
+        Util.one("#results-header").classList.add("toggle");
+    }
+}
+
 // Attaching events on document because then we can do it without waiting for
 // the DOM to be ready (i.e. before DOMContentLoaded fires)
 Util.events(document, {
@@ -361,7 +412,25 @@ Util.events(document, {
             });
             Util.one("#search").value = sessionStorage.getItem('query') == null ? "" : sessionStorage.getItem('query');
         }
+        Util.one("#results-header").addEventListener("click", toggleResults);
 
+        var saveButton = Util.one("#question-bookmark");
+        var saveIcon = Util.one("#bookmark-icon");
+        saveButton.addEventListener("click", function () {
+            if (saveButton.classList.contains("toggle")) {
+                saveButton.classList.remove("toggle");
+                saveIcon.classList.remove("fas");
+                saveIcon.classList.add("far");
+            } else {
+                saveButton.classList.add("toggle");
+                saveIcon.classList.remove("far");
+                saveIcon.classList.add("fas");
+            }
+        })
 
+        Util.one("#question-reply").addEventListener("click", function () {
+            Util.one("#post-textbox").focus();
+            recordingAnswer();
+        })
     }
 });
